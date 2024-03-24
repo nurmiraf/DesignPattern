@@ -55,11 +55,10 @@ void GameManager::play() {
 
 void GameManager::makeMove() {
     int row, col, num;
-    std::cout << "Enter row, column, and number (0 to exit): ";
     std::cin >> row >> col >> num;
 
     if (row == 0 || col == 0 || num == 0)
-        return;
+        exit(0);
 
     if (row < 1 || row > 9 || col < 1 || col > 9 || num < 1 || num > 9) {
         std::cout << "Invalid input! Please enter valid row, column, and number." << std::endl;
