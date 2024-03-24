@@ -12,14 +12,14 @@ void GameManager::selectDifficulty() {
     std::cout << "1. Easy" << std::endl;
     std::cout << "2. Medium" << std::endl;
     std::cout << "3. Hard" << std::endl;
-    int choice;
+    int diff;
     do {
         std::cout << "Enter your choice (1-3): ";
-        std::cin >> choice;
-    } while (choice < 1 || choice > 3);
+        std::cin >> diff;
+    } while (diff < 1 || diff > 3);
 
     std::string folderName;
-    switch (choice) {
+    switch (diff) {
         case 1:
             folderName = "easy/";
             break;
@@ -32,11 +32,11 @@ void GameManager::selectDifficulty() {
     }
 
     std::string filename;
-    switch (choice) {
+    switch (diff) {
         case 1:
         case 2:
         case 3:
-            filename = folderName + "template.txt";
+            filename = folderName + "board.txt";
             break;
         }
         board.setFixedCellsFromTxt(filename);
