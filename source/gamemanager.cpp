@@ -55,6 +55,7 @@ void GameManager::play() {
 
 void GameManager::makeMove() {
     int row, col, num;
+    std::cout << "Enter row, column, and number (all 0 to exit): ";
     std::cin >> row >> col >> num;
 
     if (row == 0 || col == 0 || num == 0)
