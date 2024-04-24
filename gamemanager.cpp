@@ -53,14 +53,20 @@ void GameManager::play() {
     std::cout << "Congratulations, " << player.getName() << "! You solved the puzzle!" << std::endl;
 }
 
+
 void GameManager::makeMove() {
     int row, col, num;
-    std::cout << "Enter row, column, and number (all 0 to exit): ";
+    std::cout << "Enter row column number (all 0 to exit, all -1 to undo): ";
     std::cin >> row >> col >> num;
 
     if (row == 0 || col == 0 || num == 0)
         exit(0);
 
+    if (row == -1 && col == -1 && num == -1) {
+        undoMove();
+        return;
+    }
+    
     if (row < 1 || row > 9 || col < 1 || col > 9 || num < 1 || num > 9) {
         std::cout << "Invalid input! Please enter valid row, column, and number." << std::endl;
         return makeMove();
@@ -76,5 +82,19 @@ void GameManager::makeMove() {
         return makeMove();
     }
 
+        moveHistory.push_back(std::make_pair(row - 1, col - 1));
         board.setCell(row - 1, col - 1, num);
+}
+
+void GameManager::undoMove() {
+    if (moveHistory.empty()) {
+        std::cout << "No moves to undo." << std::endl;
+        return;
+    }
+
+    // Get the last move from history and revert the cell value to 0
+    auto lastMove = moveHistory.back();
+    moveHistory.pop_back();
+    board.setCell(lastMove.first, lastMove.second, 0);
+    std::cout << "Undo successful." << std::endl;
 }
